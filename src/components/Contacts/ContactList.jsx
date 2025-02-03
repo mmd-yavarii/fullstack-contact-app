@@ -1,9 +1,11 @@
 import ContactCard from './ContactCard';
 
-const ContactList = (props) => {
+const ContactList = ({ contacts }) => {
     return (
         <div>
-            <ContactCard />
+            {contacts.map((item) => (
+                <ContactCard key={item.id} info={item} />
+            ))}
         </div>
     );
 };
