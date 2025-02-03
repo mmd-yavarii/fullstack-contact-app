@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import Header from './components/Header.jsx';
-import Contacts from './components/Contacts.jsx';
+import Header from './components/Header/Header.jsx';
+import ContactList from './components/Contacts/ContactList.jsx';
+import EmptyPage from './components/EmptyPage/EmptyPage.jsx';
 
 function App() {
+    const [contacts, setContacts] = useState([1]);
+
     return (
         <>
             <Header />
-            <Contacts />
+
+            {contacts.length ? <ContactList /> : <EmptyPage />}
         </>
     );
 }

@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+    z-index: 1;
+    position: sticky;
+    top: 0;
+    gap: 1em;
+}
+
+.addButtonAndMessage {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.addButtonAndMessage button {
+    background-color: transparent;
+    color: var(--them-color);
+    border: none;
+    outline: none;
+}
+
+.search {
+    background-color: var(--input-color);
+    border-radius: 10px;
+    padding-left: 10px;
+    border: 1px solid #f0efef;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.search input {
+    width: 100%;
+}
+
+@media (min-width: 500px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .search {
+        max-width: 350px;
+    }
+    .addButtonAndMessage {
+        gap: 2em;
+        align-items: center;
+    }
+}
