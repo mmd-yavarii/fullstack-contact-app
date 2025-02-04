@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header/Header.jsx';
 import ContactList from './components/Contacts/ContactList.jsx';
 import EmptyPage from './components/EmptyPage/EmptyPage.jsx';
+import Modal from './components/Modal/Modal.jsx';
 
 function App() {
     const [contacts, setContacts] = useState([
@@ -23,6 +24,10 @@ function App() {
             ) : (
                 <EmptyPage />
             )}
+
+            <Modal show={true}>
+                <h1>hello</h1>
+            </Modal>
         </>
     );
 }
