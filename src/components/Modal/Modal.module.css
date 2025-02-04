@@ -1,8 +1,7 @@
 .container {
     width: 92%;
-    height: 60%;
-    background-color: var(--backcround-color);
-
+    max-width: 1000px;
+    background-color: var(--background-color);
     border-radius: 25px;
     padding: 1em;
     position: fixed;
