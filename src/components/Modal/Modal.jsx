@@ -1,36 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import styles from './Modal.module.css';
 
-const Modal = ({ children, show }) => {
-    const [isShow, setIsShow] = useState(show);
-
-    useEffect(() => {
-        setIsShow(show);
-    }, [show]);
-
-    // close modal after click outside
+const Modal = ({ children, show, closer }) => {
+    // closer page
     useEffect(() => {
         const handleClickOutside = (event) => {
             const ele = document.querySelector('#modal');
-            if (ele && !ele.contains(event.target)) {
-                setIsShow(false);
+            if (
+                ele &&
+                !ele.contains(event.target) &&
+                event.target.className != 'modalOpener'
+            ) {
+                closer(false);
             }
         };
-        if (isShow) {
+        if (show) {
             document.addEventListener('click', handleClickOutside);
         }
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, [isShow]);
+    }, [show]);
+
+    if (!show) return null;
 
     return (
-        isShow && (
-            <div className={styles.container} id="modal">
-                {children}
-            </div>
-        )
+        <div className={styles.container} id="modal">
+            {children}
+        </div>
     );
 };
 

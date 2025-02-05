@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Header from './components/Header/Header.jsx';
 import ContactList from './components/Contacts/ContactList.jsx';
@@ -9,6 +9,7 @@ import Alert from './components/Alert/Alert.jsx';
 
 function App() {
     const [contacts, setContacts] = useState([]);
+    const [showAddPage, setShowAddPage] = useState(false);
     const [alert, setAlert] = useState({
         type: '',
         message: '',
@@ -19,7 +20,7 @@ function App() {
         <>
             {alert.show && <Alert type={alert.type} text={alert.message} />}
 
-            <Header />
+            <Header setShowAddPage={setShowAddPage} showAddPage={showAddPage} />
 
             {/* show contacts */}
             {contacts.length ? (
@@ -29,9 +30,11 @@ function App() {
             )}
 
             {/* modal for add new contacts  */}
-            <Modal show={true}>
-                <AddContact setContacts={setContacts} setAlert={setAlert} />
-            </Modal>
+            {showAddPage && (
+                <Modal show={showAddPage} closer={setShowAddPage}>
+                    <AddContact setContacts={setContacts} setAlert={setAlert} />
+                </Modal>
+            )}
         </>
     );
 }

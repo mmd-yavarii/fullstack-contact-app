@@ -4,7 +4,7 @@ import styles from './ContactCard.module.css';
 
 const ContactCard = ({ info: { name, phone, email } }) => {
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} modalOpener`}>
             <div className={styles.image}>
                 <LuUserRound fontSize="1.5rem" opacity={0.4} />
             </div>
