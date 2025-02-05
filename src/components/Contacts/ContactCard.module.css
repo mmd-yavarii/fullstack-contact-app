@@ -41,3 +41,9 @@
     font-size: 0.9rem;
     margin-bottom: 4px;
 }
+
+@media (min-width: 700px) {
+    .container {
+        cursor: pointer;
+    }
+}
