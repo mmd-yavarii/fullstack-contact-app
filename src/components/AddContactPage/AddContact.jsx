@@ -1,6 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 
+import {
+    convertNumbers,
+    phoenRegex,
+    emailRegex,
+} from '../../constants/regexes.js';
 import styles from './AddContact.module.css';
 
 const AddContact = ({ setContacts, setAlert }) => {
@@ -12,22 +17,24 @@ const AddContact = ({ setContacts, setAlert }) => {
 
     // set inputs data
     const changeHandler = (event) => {
+        event.target.value = convertNumbers(event.target.value);
+
         const key = event.target.name;
-        const value = event.target.value;
+        let value = event.target.value;
+
+        if (key === 'phone') {
+            if (isNaN(value[value.length - 1])) {
+                value = value.slice(0, -1);
+            }
+        }
         setInfo((pre) => ({ ...pre, [key]: value }));
     };
 
-    // add data
-    const addHandler = () => {
-        if (info.name.length && info.email.length && info.phone.length) {
-            setContacts((pre) => [...pre, { ...info, id: uuidv4() }]);
-            setInfo({ name: '', email: '', phone: '' });
-            return;
-        }
-        // show alert
+    // config alert message
+    const alerter = (emssage, type = 'error') => {
         setAlert({
-            type: 'error',
-            message: 'All fields must be filled out',
+            type: type,
+            message: emssage,
             show: true,
         });
         setTimeout(() => {
@@ -36,7 +43,22 @@ const AddContact = ({ setContacts, setAlert }) => {
                 message: '',
                 show: false,
             });
-        }, 1500);
+        }, 2000);
+    };
+
+    // add data
+    const addHandler = () => {
+        if (info.name.length && info.email.length && info.phone.length) {
+            if (phoenRegex.test(info.phone) && emailRegex.test(info.email)) {
+                setContacts((pre) => [...pre, { ...info, id: uuidv4() }]);
+                setInfo({ name: '', email: '', phone: '' });
+                alerter('Contact added successfully ! ', 'success');
+            } else {
+                alerter('Invalid phone number or email !');
+            }
+        } else {
+            alerter('All fields must be filled out !');
+        }
     };
 
     return (
@@ -71,7 +93,7 @@ const AddContact = ({ setContacts, setAlert }) => {
                     <label htmlFor="phone">Enter Phone Number</label>
                 )}
                 <input
-                    type="number"
+                    type="text"
                     id="phone"
                     value={info.phone}
                     onChange={changeHandler}
