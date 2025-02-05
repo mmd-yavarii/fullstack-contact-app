@@ -44,3 +44,23 @@
     color: var(--them-color);
     font-size: 0.7rem;
 }
+
+@media (min-width: 700px) {
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 600px;
+        margin: auto;
+        margin-bottom: 1em;
+        gap: 1em;
+    }
+    .container h3 {
+        display: none;
+    }
+    .inps {
+        margin-top: 2em;
+    }
+    .container button {
+        margin-top: 0;
+    }
+}
