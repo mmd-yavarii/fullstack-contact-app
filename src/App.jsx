@@ -7,7 +7,6 @@ import Modal from './components/Modal/Modal.jsx';
 import AddContact from './components/AddContactPage/AddContact.jsx';
 import Alert from './components/Alert/Alert.jsx';
 
-// !'contacts' in localStorage && localStorage.setItem('contacts', []);
 const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
 
 function App() {
@@ -25,7 +24,11 @@ function App() {
         <>
             {alert.show && <Alert type={alert.type} text={alert.message} />}
 
-            <Header setShowAddPage={setShowAddPage} showAddPage={showAddPage} />
+            <Header
+                setShowAddPage={setShowAddPage}
+                setDisplayContacts={setDisplayContacts}
+                contacts={contacts}
+            />
 
             {/* show contacts */}
             {displayContacts.length ? (
@@ -37,7 +40,6 @@ function App() {
             {/* modal for add new contacts  */}
             {showAddPage && (
                 <Modal show={showAddPage} closer={setShowAddPage}>
-                    {/* <AddContact setContacts={setContacts} setAlert={setAlert} /> */}
                     <AddContact contacts={contacts} setAlert={setAlert} />
                 </Modal>
             )}
