@@ -12,7 +12,7 @@
     left: 50%;
     transform: translateX(-50%);
     box-shadow: 0 0 30px 10px #00000022;
-
+    text-align: center;
     transform: translate(-50%, 100vh);
     animation: show-alert 0.6s cubic-bezier(0.25, 1, 0.3, 1) forwards;
     z-index: 2;

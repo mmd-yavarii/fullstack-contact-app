@@ -8,7 +8,7 @@ import {
 } from '../../constants/regexes.js';
 import styles from './AddContact.module.css';
 
-const AddContact = ({ setContacts, setAlert }) => {
+const AddContact = ({ contacts, setAlert }) => {
     const [info, setInfo] = useState({
         name: '',
         email: '',
@@ -50,8 +50,9 @@ const AddContact = ({ setContacts, setAlert }) => {
     const addHandler = () => {
         if (info.name.length && info.email.length && info.phone.length) {
             if (phoenRegex.test(info.phone) && emailRegex.test(info.email)) {
-                setContacts((pre) => [...pre, { ...info, id: uuidv4() }]);
+                contacts.push({ ...info, id: uuidv4() });
                 setInfo({ name: '', email: '', phone: '' });
+                localStorage.setItem('contacts', JSON.stringify(contacts));
                 alerter('Contact added successfully ! ', 'success');
             } else {
                 alerter('Invalid phone number or email !');

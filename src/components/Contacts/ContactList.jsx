@@ -1,9 +1,9 @@
 import ContactCard from './ContactCard';
 
-const ContactList = ({ contacts }) => {
+const ContactList = ({ displayContacts }) => {
     return (
         <div>
-            {contacts.map((item) => (
+            {displayContacts.map((item) => (
                 <ContactCard key={item.id} info={item} />
             ))}
         </div>

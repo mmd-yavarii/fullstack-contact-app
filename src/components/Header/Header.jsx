@@ -2,7 +2,7 @@ import { FiSearch } from 'react-icons/fi';
 
 import styles from './Header.module.css';
 
-const Header = ({ setShowAddPage, showAddPage }) => {
+const Header = ({ setShowAddPage }) => {
     // show add page handler
     const showPage = () => {
         setShowAddPage(true);
