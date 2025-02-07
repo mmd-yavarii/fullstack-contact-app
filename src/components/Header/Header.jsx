@@ -20,9 +20,11 @@ const Header = ({ setShowAddPage, setDisplayContacts, contacts }) => {
         setDisplayContacts(
             contacts.filter(
                 (i) =>
-                    i.name.toLowerCase().includes(value) ||
-                    i.phone.includes(value) ||
-                    i.email.includes(value),
+                    (i.name?.toLowerCase() || '').includes(
+                        value.toLowerCase(),
+                    ) ||
+                    (i.phone || '').includes(value) ||
+                    (i.email || '').includes(value),
             ),
         );
     };
