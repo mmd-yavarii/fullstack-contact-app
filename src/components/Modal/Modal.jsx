@@ -10,9 +10,9 @@ const Modal = ({ children, show, closer }) => {
             if (
                 ele &&
                 !ele.contains(event.target) &&
-                event.target.className != 'modalOpener'
+                !event.target.closest('.modalOpener')
             ) {
-                closer(false);
+                closer();
             }
         };
         if (show) {
