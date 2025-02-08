@@ -1,0 +1,68 @@
+.container {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
+}
+.userImage {
+    width: 3em;
+    height: 3em;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.nameAndImage {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.nameAndImage p {
+    font-weight: 500;
+    color: var(--them-color);
+}
+
+.phoneAndEmail {
+    margin-top: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.6em;
+}
+.phoneAndEmail a {
+    width: 100%;
+    text-align: center;
+    padding: 0.8em;
+    text-decoration: none;
+    background-color: var(--input-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.buttons {
+    /* margin-bottom: em; */
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 0.7em;
+}
+.buttons button {
+    background-color: transparent;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .phoneAndEmail a {
+        cursor: none;
+    }
+}
