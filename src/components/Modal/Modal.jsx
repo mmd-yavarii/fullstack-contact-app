@@ -26,8 +26,10 @@ const Modal = ({ children, show, closer }) => {
     if (!show) return null;
 
     return (
-        <div className={styles.container} id="modal">
-            {children}
+        <div className={styles.mmd}>
+            <div className={styles.container} id="modal">
+                {children}
+            </div>
         </div>
     );
 };
