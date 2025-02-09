@@ -1,18 +1,22 @@
 import { FiSearch } from 'react-icons/fi';
 
 import styles from './Header.module.css';
+import { useState } from 'react';
+import { convertNumbers } from '../../constants/regexes.js';
 
 const Header = ({ setShowAddPage, setDisplayContacts, contacts }) => {
+    const [inp, setInp] = useState('');
+
     // show add page handler
     const showPage = () => {
         setShowAddPage(true);
     };
-
     // search handler
     const saerchHandler = (event) => {
-        const value = event.target.value.trim().toLowerCase();
+        const value = convertNumbers(event.target.value).toLowerCase();
+        setInp(value);
 
-        if (!value) {
+        if (!value.length) {
             setDisplayContacts(contacts);
             return;
         }
@@ -20,9 +24,7 @@ const Header = ({ setShowAddPage, setDisplayContacts, contacts }) => {
         setDisplayContacts(
             contacts.filter(
                 (i) =>
-                    (i.name?.toLowerCase() || '').includes(
-                        value.toLowerCase(),
-                    ) ||
+                    (i.name?.toLowerCase() || '').includes(value) ||
                     (i.phone || '').includes(value) ||
                     (i.email || '').includes(value),
             ),
@@ -43,6 +45,7 @@ const Header = ({ setShowAddPage, setDisplayContacts, contacts }) => {
                     type="text"
                     placeholder="Search name, number, etc"
                     onChange={saerchHandler}
+                    value={inp}
                 />
             </div>
         </div>
