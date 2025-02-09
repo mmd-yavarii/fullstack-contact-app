@@ -31,6 +31,12 @@ function App() {
         setShowContactInfo({ show: true, info: contact });
     }
 
+    // modal closer
+    function modalCloser() {
+        setShowAddPage(false);
+        setShowContactInfo({ show: false, info: {} });
+    }
+
     return (
         <>
             {alert.show && <Alert type={alert.type} text={alert.message} />}
@@ -51,23 +57,17 @@ function App() {
                 <EmptyPage />
             )}
 
-            {/* modal for add new contacts  */}
-            {showAddPage && (
-                <Modal show={showAddPage} closer={() => setShowAddPage(false)}>
-                    <AddContact contacts={contacts} setAlert={setAlert} />
-                </Modal>
-            )}
-
-            {/* users info page */}
-            {showContactInfo.show && (
-                <Modal
-                    show={true}
-                    closer={() => setShowContactInfo({ show: false, info: {} })}
-                >
-                    <ContactInfoPage
-                        info={showContactInfo.info}
-                        contacts={contacts}
-                    />
+            {/* modal page */}
+            {(showAddPage || showContactInfo.show) && (
+                <Modal show={true} closer={modalCloser}>
+                    {showAddPage ? (
+                        <AddContact contacts={contacts} setAlert={setAlert} />
+                    ) : (
+                        <ContactInfoPage
+                            info={showContactInfo.info}
+                            contacts={contacts}
+                        />
+                    )}
                 </Modal>
             )}
         </>
