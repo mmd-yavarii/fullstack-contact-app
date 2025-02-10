@@ -4,7 +4,7 @@ import { PiTrash } from 'react-icons/pi';
 
 import styles from './ContactInfoPage.module.css';
 
-const ContactInfoPage = ({ info, contacts, setDisplayContacts }) => {
+const ContactInfoPage = ({ info, contacts }) => {
     // delete a contact handler
     const deleteHandler = () => {
         const permission = confirm('are you sure ?');
