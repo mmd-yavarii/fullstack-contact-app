@@ -4,11 +4,16 @@ import { PiTrash } from 'react-icons/pi';
 
 import styles from './ContactInfoPage.module.css';
 
-const ContactInfoPage = ({ info }) => {
-    // save on local storage
-    const storeData = () => {
-        // localStorage.setItem();
-        console.log('save');
+const ContactInfoPage = ({ info, contacts, setDisplayContacts }) => {
+    // delete a contact handler
+    const deleteHandler = () => {
+        const permission = confirm('are you sure ?');
+        if (permission) {
+            const result = contacts.filter((i) => i.id !== info.id);
+            contacts = result;
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            location.reload();
+        }
     };
 
     return (
@@ -17,7 +22,7 @@ const ContactInfoPage = ({ info }) => {
                 <button>
                     <LiaUserEditSolid fontSize="1.3rem" opacity="0.6" />
                 </button>
-                <button style={{ color: 'red' }}>
+                <button onClick={deleteHandler}>
                     <PiTrash fontSize="1.3rem" color="red" opacity="0.6" />
                 </button>
             </div>
