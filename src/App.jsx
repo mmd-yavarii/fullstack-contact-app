@@ -69,7 +69,10 @@ function App() {
             {(showAddPage || showContactInfo.show) && (
                 <Modal show={true} closer={modalCloser}>
                     {showAddPage ? (
-                        <AddContact contacts={contacts} setAlert={setAlert} />
+                        <AddContact
+                            contacts={contacts}
+                            alertMessage={alertMessage}
+                        />
                     ) : (
                         <ContactInfoPage
                             info={showContactInfo.info}

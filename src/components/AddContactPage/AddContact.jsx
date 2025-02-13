@@ -8,7 +8,7 @@ import {
 } from '../../constants/regexes.js';
 import styles from './AddContact.module.css';
 
-const AddContact = ({ contacts, setAlert }) => {
+const AddContact = ({ contacts, alertMessage }) => {
     const [info, setInfo] = useState({
         name: '',
         email: '',
@@ -53,12 +53,12 @@ const AddContact = ({ contacts, setAlert }) => {
                 contacts.push({ ...info, id: uuidv4() });
                 setInfo({ name: '', email: '', phone: '' });
                 localStorage.setItem('contacts', JSON.stringify(contacts));
-                alerter('Contact added successfully ! ', 'success');
+                alertMessage('success', 'Contact added successfully ! ');
             } else {
-                alerter('Invalid phone number or email !');
+                alertMessage('error', 'Invalid phone number or email !');
             }
         } else {
-            alerter('All fields must be filled out !');
+            alertMessage('error', 'All fields must be filled out !');
         }
     };
 
