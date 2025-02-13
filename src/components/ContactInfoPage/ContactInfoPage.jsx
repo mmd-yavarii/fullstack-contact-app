@@ -16,10 +16,25 @@ const ContactInfoPage = ({ info, contacts }) => {
         }
     };
 
+    // change contact info
+    const changeContactInfo = () => {
+        const item = contacts.find((i) => i.id == info.id);
+        const name = prompt('name', item.name);
+        const phone = prompt('phone number', item.phone);
+        const email = prompt('email', item.email);
+        if (name.length && phone.length && email.length) {
+            item.name = name;
+            item.phone = phone;
+            item.email = email;
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            location.reload();
+        }
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.buttons}>
-                <button>
+                <button onClick={changeContactInfo}>
                     <LiaUserEditSolid fontSize="1.3rem" opacity="0.6" />
                 </button>
                 <button onClick={deleteHandler}>
