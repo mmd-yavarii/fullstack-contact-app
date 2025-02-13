@@ -2,9 +2,10 @@ import { CiUser } from 'react-icons/ci';
 import { LiaUserEditSolid } from 'react-icons/lia';
 import { PiTrash } from 'react-icons/pi';
 
+import { phoenRegex, emailRegex } from '../../constants/regexes.js';
 import styles from './ContactInfoPage.module.css';
 
-const ContactInfoPage = ({ info, contacts }) => {
+const ContactInfoPage = ({ info, contacts, alertMessage }) => {
     // delete a contact handler
     const deleteHandler = () => {
         const permission = confirm('are you sure ?');
@@ -23,11 +24,17 @@ const ContactInfoPage = ({ info, contacts }) => {
         const phone = prompt('phone number', item.phone);
         const email = prompt('email', item.email);
         if (name.length && phone.length && email.length) {
-            item.name = name;
-            item.phone = phone;
-            item.email = email;
-            localStorage.setItem('contacts', JSON.stringify(contacts));
-            location.reload();
+            if (phoenRegex.test(phone) && emailRegex.test(email)) {
+                item.name = name;
+                item.phone = phone;
+                item.email = email;
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+                location.reload();
+            } else {
+                alertMessage('error', 'please fill in inputs correctly');
+            }
+        } else {
+            alertMessage('error', 'you must fill in all inputs');
         }
     };
 

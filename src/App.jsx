@@ -25,6 +25,14 @@ function App() {
         show: false,
     });
 
+    // set alert configuration
+    function alertMessage(type, message) {
+        setAlert({ type: type, message: message, show: true });
+        setTimeout(() => {
+            setAlert({ type: '', message: '', show: false });
+        }, 1500);
+    }
+
     // open contacts info page after click on them
     function openContactsInfoPage(id) {
         const contact = contacts.find((i) => i.id == id);
@@ -66,6 +74,7 @@ function App() {
                         <ContactInfoPage
                             info={showContactInfo.info}
                             contacts={contacts}
+                            alertMessage={alertMessage}
                         />
                     )}
                 </Modal>
