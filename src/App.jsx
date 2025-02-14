@@ -9,9 +9,10 @@ import Alert from './components/Alert/Alert.jsx';
 
 import ContactInfoPage from './components/ContactInfoPage/ContactInfoPage.jsx';
 
-const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
-
 function App() {
+    const [contacts, setContacts] = useState(
+        JSON.parse(localStorage.getItem('contacts')) || [],
+    );
     const [displayContacts, setDisplayContacts] = useState(contacts);
 
     const [showAddPage, setShowAddPage] = useState(false);
@@ -24,6 +25,12 @@ function App() {
         message: '',
         show: false,
     });
+
+    // update display state with contacts stae
+    useEffect(() => {
+        setDisplayContacts(contacts);
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+    }, [contacts]);
 
     // set alert configuration
     function alertMessage(type, message) {
@@ -70,14 +77,16 @@ function App() {
                 <Modal show={true} closer={modalCloser}>
                     {showAddPage ? (
                         <AddContact
-                            contacts={contacts}
+                            setContacts={setContacts}
                             alertMessage={alertMessage}
                         />
                     ) : (
                         <ContactInfoPage
                             info={showContactInfo.info}
-                            contacts={contacts}
+                            setContacts={setContacts}
                             alertMessage={alertMessage}
+                            modalCloser={modalCloser}
+                            contacts={contacts}
                         />
                     )}
                 </Modal>

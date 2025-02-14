@@ -5,37 +5,44 @@ import { PiTrash } from 'react-icons/pi';
 import { phoenRegex, emailRegex } from '../../constants/regexes.js';
 import styles from './ContactInfoPage.module.css';
 
-const ContactInfoPage = ({ info, contacts, alertMessage }) => {
+const ContactInfoPage = ({
+    info,
+    setContacts,
+    alertMessage,
+    modalCloser,
+    contacts,
+}) => {
     // delete a contact handler
     const deleteHandler = () => {
         const permission = confirm('are you sure ?');
         if (permission) {
-            const result = contacts.filter((i) => i.id !== info.id);
-            contacts = result;
-            localStorage.setItem('contacts', JSON.stringify(contacts));
-            location.reload();
+            setContacts((pre) => pre.filter((i) => i.id !== info.id));
+            alertMessage('error', 'Successfully deleted!');
+            modalCloser();
         }
     };
 
     // change contact info
     const changeContactInfo = () => {
         const item = contacts.find((i) => i.id == info.id);
+
         const name = prompt('name', item.name);
         const phone = prompt('phone number', item.phone);
         const email = prompt('email', item.email);
+
         if (name.length && phone.length && email.length) {
             if (phoenRegex.test(phone) && emailRegex.test(email)) {
                 item.name = name;
                 item.phone = phone;
                 item.email = email;
-                localStorage.setItem('contacts', JSON.stringify(contacts));
-                location.reload();
             } else {
                 alertMessage('error', 'please fill in inputs correctly');
             }
         } else {
             alertMessage('error', 'you must fill in all inputs');
         }
+        alertMessage('success', 'Contact has been successfully updated!');
+        modalCloser();
     };
 
     return (
