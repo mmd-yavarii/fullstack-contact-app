@@ -60,12 +60,16 @@ const ContactInfoPage = ({
                 <div className={styles.userImage}>
                     <CiUser fontSize="2rem" opacity="0.4" />
                 </div>
-                <p>{info.name}</p>
+                <div className={styles.userInfo}>
+                    <p>{info.name}</p>
+                    <span>{info.phone}</span>
+                    <span>{info.email}</span>
+                </div>
             </div>
 
             <div className={styles.phoneAndEmail}>
-                <a href={`tel:${info.phone}`}>{info.phone}</a>
-                <a href={`mailto:${info.email}`}>{info.email}</a>
+                <a href={`tel:${info.phone}`}> Make a call</a>
+                <a href={`mailto:${info.email}`}> Send email</a>
             </div>
         </div>
     );
