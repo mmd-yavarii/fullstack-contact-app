@@ -1,0 +1,31 @@
+.container {
+  padding: 20px;
+}
+
+.addNew {
+  box-shadow: 1px 2px 3px #00000017;
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.addNew * {
+  padding: 8px;
+  border-radius: 4px;
+}
+.addNew input {
+  width: 100%;
+  border: 1px solid #ccc;
+}
+.addNew input:focus {
+  border-color: dodgerblue;
+  color: dodgerblue;
+}
+.addNew button {
+  width: 80px;
+  background-color: dodgerblue;
+  color: #fff;
+}
