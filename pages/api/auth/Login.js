@@ -5,6 +5,8 @@ import { generateToken, verifyPassword } from '@/utils/Auth';
 import { serialize } from 'cookie';
 
 export default async function handler(req, res) {
+    if (req.method !== 'POST') return;
+
     try {
         await connectDb();
     } catch (error) {
@@ -28,7 +30,7 @@ export default async function handler(req, res) {
             return res.status(400).json({ status: 'failed', message: 'phone number or password is wrong' });
         }
 
-        const token = generateToken({ name: userExistance.name, phoneNumber });
+        const token = generateToken({ name: userExistance.name, phoneNumber, _id: userExistance._id });
         const cookie = serialize('token', token, {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60,

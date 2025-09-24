@@ -4,6 +4,8 @@ import connectDb from '@/utils/ConnectDb';
 import { serialize } from 'cookie';
 
 export default async function handler(req, res) {
+    if (req.method !== 'POST') return;
+
     try {
         await connectDb();
     } catch (error) {
@@ -28,7 +30,7 @@ export default async function handler(req, res) {
     const hashedPassword = await hashPassword(password);
     const user = await User.create({ name, phoneNumber, password: hashedPassword });
 
-    const token = generateToken({ name, phoneNumber });
+    const token = generateToken({ name, phoneNumber, _id: user._id });
     const cookie = serialize('token', token, {
         httpOnly: true,
         maxAge: 7 * 24 * 60 * 60,

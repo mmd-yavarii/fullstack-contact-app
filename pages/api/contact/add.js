@@ -3,6 +3,8 @@ import { verifyToken } from '@/utils/Auth';
 import connectDb from '@/utils/ConnectDb';
 
 export default async function handler(req, res) {
+    if (req.method !== 'POST') return;
+
     try {
         await connectDb();
     } catch (error) {
