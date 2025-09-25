@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './Form.module.css';
 import Link from 'next/link';
 import { PulseLoader } from 'react-spinners';
+import Input from '../element/Input';
 
 export default function Form({ formType, isLoading, handler }) {
     const [form, setForm] = useState(
@@ -41,16 +42,6 @@ export default function Form({ formType, isLoading, handler }) {
             <Link href={formType === 'signup' ? '/auth/login' : '/auth/signup'}>
                 {formType === 'signup' ? "I've already have an account" : 'Create an account'}
             </Link>
-        </div>
-    );
-}
-
-// inputs component
-function Input({ type, state, onChange, label }) {
-    return (
-        <div className={styles.input}>
-            <label htmlFor={label}>{label}</label>
-            <input type={type} value={state} onChange={onChange} id={label} />
         </div>
     );
 }

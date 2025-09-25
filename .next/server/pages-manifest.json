@@ -2,8 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/contact/add": "pages/api/contact/add.js",
-  "/[userId]": "pages/[userId].js",
-  "/": "pages/index.js",
-  "/api/contact": "pages/api/contact.js"
+  "/[phoneNumber]": "pages/[phoneNumber].js",
+  "/auth/login": "pages/auth/login.js",
+  "/api/auth/login": "pages/api/auth/login.js",
+  "/api/contact": "pages/api/contact.js",
+  "/api/contact/[phoneNumber]": "pages/api/contact/[phoneNumber].js",
+  "/": "pages/index.js"
 }

@@ -28,6 +28,7 @@ export default async function handler(req, res) {
             status: 'success',
             message: 'Contacts retrieved successfully',
             data: contacts,
+            userNumber: user.phoneNumber,
         });
     } catch (err) {
         console.error(err);
